@@ -1,0 +1,432 @@
+#dialog-confirm {
+    display:none
+}
+.shut-up {
+    float:left;
+    display: inline-block;
+    margin-top: 1em;
+}
+
+.settings{
+    fill: blue
+}
+
+.bar {
+  fill: steelblue;
+}
+.hover{
+        background-color: #eee
+}
+.bar:hover {
+  fill: brown;
+}
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+rect {
+  fill: blue;
+  stroke: #fff;
+}
+
+
+text {
+  font: 10px sans-serif;
+}
+.res {
+}
+
+.tooltip {
+        position: absolute;
+        width: 200px;
+        height: 50px;
+        pointer-events: none;
+        background-color: #FFFFFF;
+        z-index:1000;
+    }
+
+.node {
+  border: solid 1px white;
+  font: 5px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 2px;
+}
+
+
+
+	.axis {
+	  font: 10px sans-serif;
+	}
+
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+        .background path {
+            fill: none;
+            stroke: #ddd;
+            shape-rendering: crispEdges;
+        }
+
+        .foreground path {
+            fill: none;
+            stroke: steelblue;
+        }
+
+        .brush .extent {
+            fill-opacity: .3;
+            stroke: #fff;
+            shape-rendering: crispEdges;
+        }
+
+
+        .axis text {
+            text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+            cursor: move;
+        }
+
+.jqOlapCube-drag-row-off  {
+    display: none;
+    background-color: #FFF0B0;    
+}
+.jqOlapCube-drag-measure-off {
+    display: none; 
+    background-color: #FFF0B0;          
+}
+.jqOlapCube-drag-col-off {
+    display: none;
+    background-color: #FFF0B0;           
+}
+
+.jqOlapCube-drag-row-on {
+	background: #6CEA3D;
+    cursor: pointer;
+}
+.jqOlapCube-drag-measure-on {
+	background: #6CEA3D;
+    cursor: pointer;
+}
+.jqOlapCube-drag-col-on {
+	background: #6CEA3D;
+    cursor: pointer;
+}
+
+.jqOlapCube-display-on {
+    display: inherit;   
+}
+
+[rel=disabled] {
+   opacity: 0.6; /* Real browsers */
+   filter: alpha(opacity = 60); /* MSIE */
+   font-style: italic;
+   color: #DDDDDD;  
+   		 
+}
+
+
+/* jqOlapCube divs: */
+
+div.jqOlapCubeMaster {    
+    width:100%;
+    height: 100%;
+}
+div.jqOlapCubeRight {    
+    overflow: auto;
+    /* text-overflow:ellipsis; */
+}
+div.jqOlapCubeLeft {     
+   float:left;   
+   margin-right: 10px;
+}
+
+/********************* Filter *****************************/
+div.jqOlapCube-filterPane {
+	margin-bottom: 10px;
+    background-image: url(filter.png);
+    background-position-x: 5px;
+    background-position-y: center;
+    background-repeat:no-repeat;
+    padding: 3px 3px 1px 30px;
+    min-height: 20px;
+    background-color: #FFF0B0;
+}
+
+span.jqOlapCube-filterMember {    
+    border: solid 1px #0099FF;
+    padding-left: 2px;
+    padding-right: 2px;    
+    cursor:pointer;
+}
+
+div.jqOlapCube-filterHierarchy
+{
+    background-image: url(dimension.png);
+    background-repeat:no-repeat;
+    padding-left: 20px;
+    margin-right: auto;
+    cursor: pointer;
+    margin-bottom: 3px;
+}
+div.jqOlapCube-filterMemberList { 
+    border:1px solid black; 
+    min-height: 200px; 
+    max-height: 600px; 
+    width:100%; 
+    overflow-y: auto; 
+}
+/********************* Filter *****************************/
+
+
+
+
+/********************* Toolbar *********************/
+div.jqOlapCube-toolbar
+{
+    background-color: #0099FF;
+    margin-bottom: 3px;
+    vertical-align: middle;
+    padding: 3px;
+}
+div.jqOlapCube-spinner
+{
+    width: 32px;
+    height: 32px;
+    background-image: url(spinner.gif);
+    background-repeat: no-repeat;  
+    float:right;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+div.jqOlapCube-toolbar button
+{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+    width: 32px;
+    height: 32px;
+    margin-right: 3px;
+    border: none;
+    cursor: pointer;
+}
+button.jqOlapCube-toggledimtree-button
+{
+    background-image: url(arrow-left32.png);
+}
+button.jqOlapCube-toggledimtree-button-off
+{
+    background-image: url(arrow-right32.png);
+}
+button.jqOlapCube-snd-button
+{
+    background-image: url(snd32.png);
+}
+button.jqOlapCube-snd-button[disabled=disabled]
+{
+    background-image: url(snd32-g.png);
+}
+button.jqOlapCube-orderby-button{
+    background-image: url(sort32.png);
+}
+button.jqOlapCube-orderby-button[disabled=disabled]{
+    background-image: url(sort32-g.png);
+}
+button.jqOlapCube-csv-button{
+    background-image: url(xlsx32.png);
+}
+button.jqOlapCube-csv-button[disabled=disabled]{
+    background-image: url(xlsx32-g.png);
+}
+button.jqOlapCube-savemdx-button{
+    background-image: url(save32.png);
+}
+button.jqOlapCube-savemdx-button[disabled=disabled]{
+    background-image: url(save32-g.png);
+}
+button.jqOlapCube-togglevis-button
+{
+    background-image: url(VisIconDisable.png);
+}
+button.jqOlapCube-togglevis-button-off
+{
+    background-image: url(VisIcon.png);
+}
+button.jqOlapCube-nextvis-button
+{
+    background-image: url(nextVis.png);
+}
+button.jqOlapCube-preset-button
+{
+    background-image: url(load.png);
+}
+
+
+.jqOlapCube-garbageDiv
+{
+     background-image: url(bin1.png);
+     width: 128px;
+     height: 128px;
+     position: absolute;
+}
+
+.jqOlapCube-gcan-hover {
+    background-image: url(bin2.png);
+    border: none;
+    background-color: transparent;
+}
+
+div.jqOlapCube-dimTreeHeader
+{
+    text-align: left;
+    padding: 11px 5px 5px 5px;
+    background-color: #0099FF;
+    color: white;
+    font-weight: bold; 
+    height:22px;
+}
+
+.jstree-jqOlapCube.jstree-focused {
+    background-color: white;
+    padding: 5px 0;
+}
+
+div.jqOlapCube-statusBar {
+    margin: 8px 5px 5px 5px;
+    overflow: auto;
+    width: 300px;
+    float:right;
+    text-align: right;
+    font-weight: bold;
+    color: white;    
+}
+
+/* Slice and dice panel: **************************************************/
+div.jqOlapCube-snd-measure, div.jqOlapCube-snd-col, div.jqOlapCube-snd-row
+{
+    max-width: 150px;
+    min-width: 50px;
+    min-height: 30px;
+    padding-left: 20px;
+    margin: 3px;
+    background:#eaeaea no-repeat;    
+    border: 1px solid black;
+    
+}
+div.jqOlapCube-snd-measure
+{
+    background-image: url(measure.png);  
+    float: left;  
+}
+div.jqOlapCube-snd-col, div.jqOlapCube-snd-row
+{
+    background-image: url(dimension.png);
+}
+#jqOlapCube-snd-sortablerows > div
+{
+   float: left;    
+}
+ 
+#jqOlapCube-snd-sortablerows {  
+    height: 35px;   /* Must be set, otherwise horizonatl drop doesn't work. */
+}
+
+
+/**************************************************************************/
+
+/*  Result table look and feel: */
+table.jqOlapCube-rtable {    
+    font-size : 12px;
+    background-color : white;    
+}
+
+th.jqOlapCube-cheader {    
+    font-size : 12px;
+    background-color: #0099FF;
+    color: white;
+    padding: 4px 4px;
+    cursor: pointer;
+}
+
+.jqOlapCube-rheader1, .jqOlapCube-rheader0
+{
+    font-size : 10px;
+    background-color: #CCEBFF;
+    cursor: pointer;
+}
+.hover { background-color: c; }
+
+td.jqOlapCube-cellyellow0, td.jqOlapCube-cellyellow1, td.jqOlapCube-cellwhite0, td.jqOlapCube-cellwhite1
+{
+    font-size : 10px;
+    text-align: right;
+}
+td.jqOlapCube-cellwhite0, td.jqOlapCube-cellwhite1  {    
+    background-color : white;
+}
+td.jqOlapCube-cellyellow0, td.jqOlapCube-cellyellow1 {
+    background-color : #FFF0B0;
+}
+
+
+/* Empty table look and feel: */
+table.jqOlapCube-emptytable {
+    border: none;
+    background-color: #FFFFEE;
+}
+
+tr.jqOlapCube-emptytr {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+span.jqOlapCube-emptytable-caption
+{
+    display: inline-block;
+    padding-top: 15px;
+    height: 40px;
+    vertical-align: middle;
+    padding-left: 5px;
+    padding-right: 5px;    
+}
+
+/* Sort */
+span.jqOlapCube-order-sortASC, span.jqOlapCube-order-sortDESC, span.jqOlapCube-order-sortBASC, span.jqOlapCube-order-sortBDESC
+{
+    width: 16px; 
+    height: 16px;
+    margin-left: 3px;
+    display: inline-block;
+}
+span.jqOlapCube-order-sortASC
+{
+    
+   background-image: url(sort1.png);
+}
+span.jqOlapCube-order-sortDESC
+{
+    background-image: url(sort2.png);
+}
+span.jqOlapCube-order-sortBASC
+{
+   background-image: url(sort3.png);
+}
+span.jqOlapCube-order-sortBDESC
+{
+   background-image: url(sort4.png);
+}
+
+.drag-on {
+    background: #6CEA3D !important;
+}
+
+.jqOlapCube-err
+{    
+    border: 2px solid red !important; 
+}
+/**************************************************************************/

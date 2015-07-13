@@ -403,7 +403,7 @@
                     }
                 },
                 "themes": {
-                    "theme": "jqOlapCube"
+                    "theme": "jqcube"
                 },
                 "callback": {   // various callbacks to attach custom logic to
 
@@ -1619,7 +1619,7 @@
     var tooltip;
 
     var initialiseVisSettings = function () {
-        visSettings = getNewVisSettings(250,250);
+        visSettings = getNewVisSettings(300,300);
 
         tooltip = d3.select("body").append("div")
             .attr("class", "tooltip")
@@ -2148,7 +2148,7 @@
             .style("fill", color);
 
         legend.append("text")
-            .attr("x", width  -20)
+            .attr("x", width  -120)
             .attr("y", 9)
             .attr("dy", ".35em")
             .style("text-anchor", "end")
@@ -2159,7 +2159,7 @@
             .attr("y", height -100)
             .attr("width", 20)
             .attr("height", 20)
-            .attr("xlink:href", "Scripts/jqOlapCube/css/Settings.png")
+            .attr("xlink:href", "js/css/Settings.png")
             .on("click", function(){settingsDialog("pieSettings",true, false);});
 
     }
@@ -2510,7 +2510,7 @@
         .attr("y", height- 20)
         .attr("width", 20)
         .attr("height", 20)
-        .attr("xlink:href", "Settings.png")
+        .attr("xlink:href", "js/css/Settings.png")
         .on("click", function () { settingsDialog("stackedBarSettings", true, false); });
     }
 
@@ -2638,7 +2638,7 @@
             .attr("y", height - 20)
             .attr("width", 20)
             .attr("height", 20)
-            .attr("xlink:href", "Settings.png")
+            .attr("xlink:href", "js/css/Settings.png")
             .on("click", function () { settingsDialog("multiLineChartSettings", true, false); });
 
 
@@ -2721,7 +2721,7 @@
             .attr("settings", "treeMapSettings")
             .attr("width", width)
             .attr("height", height)
-            .attr("viewBox", "0 0" + " " + (width + margin.left + margin.right).toString() + " " + (height + margin.top + margin.bottom).toString())
+            .attr("viewBox", "0 0" + " " + (width ).toString() + " " + (height).toString())
             .attr("preserveAspectRatio", "xMidYMid")
             .attr("class", "res")
           .append("g")
@@ -2761,11 +2761,11 @@
                 .text(function (d) { return d.children ? null : d.name; });
 
             svg.append("svg:image")
-                .attr("x", width + 10)
+                .attr("x", width - 20)
                 .attr("y", height - 20)
                 .attr("width", 20)
                 .attr("height", 20)
-                .attr("xlink:href", "Settings.png")
+                .attr("xlink:href", "js/css/Settings.png")
                 .on("click", function () { settingsDialog("treeMapSettings", true, true); });
 
 
@@ -2969,6 +2969,89 @@
 
     }
 
+
+    var divideTableForVisualisation = function (data) {
+        var xAxis = data.axisInfo[0].positions;
+        var yAxis = data.axisInfo[1].positions;
+        var xDepth = [];
+        var xLevelCount = [];
+        var yLevelCount = [];
+        var yDepth = [];
+        var results = [];
+        var xCurrent = xDepth[0];
+        var yCurrent = yDepth[0];
+        
+        for (var i = 0; i < xAxis.length; i++) {
+            xDepth[i] = xAxis[i].members[0].leveldepth;
+            if (xLevelCount[xDepth[i]] === undefined) {
+                xLevelCount[xDepth[i]] = 1;
+            }
+            else {
+                xLevelCount[xDepth[i]]++;
+
+            }
+        }
+
+        for (var j = 0; j < yAxis.length; j++) {
+            yDepth[j] = yAxis[j].members[0].leveldepth;
+            if (yLevelCount[yDepth[j]] === undefined) {
+                yLevelCount[yDepth[j]] = 1;
+            }
+            else {
+                yLevelCount[yDepth[j]]++;
+
+            }
+        }
+
+
+        var k = 0;
+        var results = [];
+        var index = [];
+        for (var i = 0; i < xLevelCount.length; i++) {
+            for (var j = 0; j < yLevelCount.length; j++) {
+                if (xLevelCount[i] !== undefined && yLevelCount[j] !== undefined) {
+                    results[k] = new subTable(xLevelCount[i], yLevelCount[j]);
+                    index[k] = i.toString() + j.toString();
+                    k++;
+                }
+
+
+            }
+        }
+        for(var i = 0; i< xAxis.length; i++) {
+            for (var j = 0; j < yAxis.length; j++) {
+                var ind = index.indexOf(xDepth[i].toString() + yDepth[j].toString());
+                results[ind].add(data.cSet[j*xAxis.length + i].formattedValue);
+            }
+        }
+        
+
+        var ni = document.getElementById('test');
+        while (ni.firstChild) {
+            ni.removeChild(ni.firstChild);
+        }
+        for (var i = 0; i < results.length; i++) {
+            var html = "<table border=1>";
+            for (var j = 0; j < results[i].data[0].length; j++) {
+                html = html + "<tr>"
+                for (var k = 0; k < results[i].data.length; k++) {
+                    html = html + "<td>"+results[i].data[k][j].trim() +"</td>";
+
+                }
+                html = html + "</tr>"
+            }
+            html = html + "</table><br><br>";
+            var element = document.createElement("div");
+            element.innerHTML = html;
+            ni.appendChild(element);
+        }
+
+        
+
+
+        
+
+    }
 
 
     function TreeMapNode() {

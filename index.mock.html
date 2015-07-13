@@ -8,22 +8,26 @@
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
     <script type="text/javascript" src="./js/jstree/jquery.jstree.js"></script>
-    <script type="text/javascript" src="./js/jqcube-1.0.0.js"></script>
+    <script type="text/javascript" src="./js/jqOlapCube-1.0.0.js"></script>
     <script type="text/javascript" src="./js/jquery.mockjax.js"></script>
     <script type="text/javascript" src="./js/mocks.js"></script>
-    <link rel="stylesheet" type="text/css" href="./js/css/jqCube.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.6/jquery.gridster.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="./js/css/jqOlapCube.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.6/jquery.gridster.min.css" />
 
 </head>
 
 <body>
 
 
-    <div id="CubeBrowser">jqCube 1.0.0. plugin demo </div>
+    <div id="CubeBrowser">jqOlapCube 1.0.0. plugin demo </div>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $('#CubeBrowser').jqCube({
+            $('#CubeBrowser').jqOlapCube({
                 'CubeName': 'Adventure Works',
                 DiscoverMetadataURL: './discover/metadata',
                 DiscoverLevelMembersURL: './discover/levelmembers',

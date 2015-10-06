@@ -10,7 +10,7 @@
 (function ($) {
 
     "use strict";
-    
+
     $.jqOlapCube = function (domElement, options) {
 
         // plugin's default options
@@ -635,7 +635,7 @@
 
 
 
-		
+
         var btnSnD, btnOrderBy;
         var rTable;
         var leftDiv, rightDiv, treeDiv, filterDiv, tableDiv, statusDiv, garbageDiv, toolbarDiv, btnCsv, btnSaveMdx;
@@ -718,7 +718,7 @@
             });
             toolbarDiv.append(btnToggleVis);
 
-          
+
 
 
             var btnNextVis = $("<button/>", {
@@ -733,10 +733,10 @@
                         var graphLabels = null;
                         var graphLabels = new Array();
                         switch (visSettings.dimensions) {
-                        
+
                             case "00":
                                 break;
-                            case "01":                                                
+                            case "01":
                                 var bar = $('<input type="checkbox" id="BarCheck" value="Bar">');
                                 var pie = $('<input type="checkbox" id="PieCheck" value="Pie">');
                                 var line = $('<input type="checkbox" id="LineCheck" value="Line">');
@@ -747,10 +747,10 @@
                                 graphLabels.push("Bar chart");
                                 graphLabels.push("Line chart");
                                 graphLabels.push("Pie chart");
- 
+
                                 for (var i = 0; i < visSettings.d1bool.length; i++) {
                                     graphs[i].prop('checked', visSettings.d1bool[i]);
-                                }                          
+                                }
                                break;
                             case "02":
                                 var stackedBar = $('<input type="checkbox" id="StackedBarCheck" value="StackedBar">');
@@ -795,7 +795,7 @@
                                     graphs[i].prop('checked', visSettings.d2bool[i]);
                                 }
                                 break;
-                        
+
                             default:
                                 var heat = $('<input type="checkbox" id="HeatCheck" value="Heat">');
                                 var tree = $('<input type="checkbox" id="TreeCheck" value="Tree">')
@@ -915,11 +915,11 @@
                         });
 
 
-                    
+
                     }
                 }
             });
-  
+
             toolbarDiv.append(btnNextVis);
             var btnLoadPreset = $("<button/>", {
                 "class": "jqOlapCube-preset-button",
@@ -1120,12 +1120,13 @@
                 btnCsv = $("<button/>", {
                     "class": "jqOlapCube-csv-button",
                     "text": "",
-                    "click": function () {
+                    "click": function (event) {
+                        event.preventDefault();
                         // must append it to document, otherwise IE will not submit.
                         var form = document.createElement("form");
                         $(form).attr("action", plugin.settings.CsvURL)
                                .attr("method", "post")
-                               .attr("target", "_top")
+                               .attr("target", "_blank")
                                .append($('<input>', {
                                    'name': 'mdx',
                                    'value': getMdx(),
@@ -1134,6 +1135,7 @@
                         document.body.appendChild(form);
                         $(form).submit();
                         document.body.removeChild(form);
+                        return false;
                     }
                 });
                 toolbarDiv.append(btnCsv);
@@ -1700,16 +1702,16 @@
                     x2Set.add(xAxis.positions[i].members[1].caption);
                     mSet.add(xAxis.positions[i].members[2].caption);
                     break;
-            } 
+            }
 
-            
+
         }
         var x1Count = x1Set.size;
         var x2Count = x2Set.size;
         var mCount = mSet.size;
 
-        
-       
+
+
         var pData = prepareData(data);
         var visDataAll = pData.visDataAll;
         var dimensionsX = pData.dimensionsX;
@@ -1905,7 +1907,7 @@
             for (var j = 0; j < data.axisInfo[1].positions.length; j++) {
 
                 var level = data.axisInfo[1].positions[j].members[i].leveldepth;
-               
+
 
 
 
@@ -1987,7 +1989,7 @@
 
 
 
-      
+
     }
 
     var x0y1BarChart = function (data) {
@@ -2028,7 +2030,7 @@
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        
+
 
         svg.append("g")
             .attr("class", "x axis")
@@ -2239,7 +2241,7 @@
 
             }
             measures.add(data.axisInfo[0].positions[i].members[data.axisInfo[0].positions[i].members.length - 1].caption);
-          
+
         }
 
         var dimensionsY = []
@@ -2279,7 +2281,7 @@
             visDataAll.push(visDataArray);
         }
 
-        
+
         for (var i = 0; i < visDataAll.length; i++) {
             x1y1Visualise(visDataAll[i], xdimensions, ydimensions);
         }
@@ -2401,7 +2403,7 @@
 
 
 
-        
+
     }
 
 
@@ -2478,8 +2480,8 @@
                 .attr("y", function (d) { return y(d.y1); })
                 .attr("height", function (d) { return y(d.y0) - y(d.y1); })
                 .style("fill", function (d) { return color(d.name); });
-                
-                
+
+
 
 
 
@@ -2661,7 +2663,7 @@
             var bool = 1;
             var j = 0;
             while (bool === 1) {
-                    
+
                 var dimension = data[i]['x' + j];
                 if (dimension) {
                     if (data[i]['xh' + j]) {
@@ -2695,7 +2697,7 @@
             dimensions.unshift("root");
             root.add(data[i].v, dimensions);
             dimensions = null;
-           
+
 
         }
 
@@ -2708,8 +2710,8 @@
         var width = margin.width,
         height = margin.height;
 
- 
-            
+
+
         var color = visSettings.treeMapSettings.color;
         var padding = visSettings.treeMapSettings.padding;
         var treemap = d3.layout.treemap()
@@ -2779,7 +2781,7 @@
     }
 
 
-    
+
     var ParallelCoordinates = function (data) {
 
         var margin = visSettings.parallelCoordinatesSettings.size;
@@ -2874,9 +2876,9 @@
     }
 
     var visualiseHeatMap = function (data, dimensionsX, dimensionsY) {
-      
+
         HeatMap(data, dimensionsX, dimensionsY);
-        
+
 
     }
 
@@ -2895,7 +2897,7 @@
             y = d3.scale.ordinal().rangeRoundBands([height, 0]),
             z = d3.scale.linear().range(["white", "green"]);
 
-            
+
 
         var svg = d3.select("body").append("svg")
             .attr("settings","heatMapSettings")
@@ -2912,7 +2914,7 @@
         //y.domain(data.map(function (d) { return d.y; }));
             y.domain(data.map(function (d) { return d.y; }));
             z.domain([0, d3.max(data, function(d) { return d.v; })]);
-            
+
             var xStep = x(dimensionsX[1]) -x(dimensionsX[0]);
             var yStep = y(dimensionsY[0]) - y(dimensionsY[1]);
 
@@ -2933,7 +2935,7 @@
                 tooltip.transition()
                      .duration(200)
                      .style("opacity", .9);
-                tooltip.html(d.x + d.y 
+                tooltip.html(d.x + d.y
                   + ": " + d.fv)
                      .style("left", (d3.event.pageX + 5) + "px")
                      .style("top", (d3.event.pageY - 28) + "px");
@@ -2980,7 +2982,7 @@
         var results = [];
         var xCurrent = xDepth[0];
         var yCurrent = yDepth[0];
-        
+
         for (var i = 0; i < xAxis.length; i++) {
             xDepth[i] = xAxis[i].members[0].leveldepth;
             if (xLevelCount[xDepth[i]] === undefined) {
@@ -3024,7 +3026,7 @@
                 results[ind].add(data.cSet[j*xAxis.length + i].formattedValue);
             }
         }
-        
+
 
         var ni = document.getElementById('test');
         while (ni.firstChild) {
@@ -3046,10 +3048,10 @@
             ni.appendChild(element);
         }
 
-        
 
 
-        
+
+
 
     }
 
@@ -3194,7 +3196,7 @@
                     comboBox.append($('<option value="presetA">Preset A</option>'));
                     comboBox.append($('<option value="presetB">Preset B</option>'));
                     pane.append(comboBox);
- 
+
             },
             buttons: {
                 "Ok": function () {
@@ -3204,7 +3206,7 @@
                             case "Preset A":
                                 newSettings = getNewVisSettings(350,350);
 
-                                
+
                                 break;
                             case "Preset B":
                                 newSettings = getNewVisSettings(500, 500);
@@ -3220,7 +3222,7 @@
                         visSettings = newSettings;
                         if(visSettings.enabled && visSettings.data) visualiseData(visSettings.data);
                         $(this).dialog('close');
-                    
+
 
 
                 },
